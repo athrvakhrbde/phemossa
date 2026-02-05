@@ -252,3 +252,4 @@ MIT
 ## Acknowledgments
 
 Inspired by Secure Scuttlebutt, a distributed social network. This implementation focuses on browser-only operation with modern web technologies.
+

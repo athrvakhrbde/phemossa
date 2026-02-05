@@ -1,0 +1,6 @@
+# Cloudflare — deploy static Next.js export (out/ from `next build`)
+name = "phemossa"
+compatibility_date = "2026-02-05"
+
+[assets]
+directory = "./out"

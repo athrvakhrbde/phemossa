@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Phemossa design system — dark, sharp, #00ffce accent, #262626 bg, Aeonik
+   --------------------------------------------------------------------------- */
+
+/* Aeonik — add .woff2 files to public/fonts/ (see public/fonts/README.md) */
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Background: #26 → #262626 */
+  --color-bg: 38 38 38;
+  --color-bg-elevated: 42 42 42;
+  --color-bg-muted: 45 45 45;
+  --color-border: 60 60 60;
+  --color-border-strong: 75 75 75;
+  --color-text: 250 250 250;
+  --color-text-muted: 180 180 180;
+  --color-text-subtle: 140 140 140;
+
+  /* Accent: #00ffce */
+  --color-accent: 0 255 206;
+  --color-accent-hover: 0 230 185;
+  --color-accent-muted: 0 255 206;
+
+  --color-success: 0 255 206;
+  --color-success-muted: 0 255 206;
+  --color-warning: 255 200 0;
+  --color-warning-muted: 255 200 0;
+  --color-error: 255 90 90;
+  --color-error-muted: 255 90 90;
+  --color-encrypted: 0 255 206;
+  --color-encrypted-muted: 0 255 206;
+
+  /* Typography — Aeonik (fallback to system-ui if fonts not in public/fonts/) */
+  --font-sans: 'Aeonik', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+
+  /* Sharp corners */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-full: 0;
+
+  /* Layout */
+  --navbar-height: 3.5rem;
+  --sidebar-width: 18rem;
+  --content-max-width: 42rem;
+
+  /* Shadows (subtle on dark) */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .phemossa-card {
+    background: rgb(var(--color-bg-elevated));
+    border: 1px solid rgb(var(--color-border));
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .phemossa-btn-primary {
+    @apply px-4 py-2 text-sm font-medium transition-colors;
+    border-radius: var(--radius-md);
+    background: rgb(var(--color-accent));
+    color: rgb(var(--color-bg));
+  }
+  .phemossa-btn-primary:hover:not(:disabled) {
+    background: rgb(var(--color-accent-hover));
+    color: rgb(var(--color-bg));
+  }
+  .phemossa-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .phemossa-btn-secondary {
+    @apply px-4 py-2 text-sm font-medium transition-colors;
+    border-radius: var(--radius-md);
+    background: rgb(var(--color-bg-elevated));
+    color: rgb(var(--color-text));
+    border: 1px solid rgb(var(--color-border));
+  }
+  .phemossa-btn-secondary:hover:not(:disabled) {
+    background: rgb(var(--color-bg-muted));
+    border-color: rgb(var(--color-border-strong));
+  }
+
+  .phemossa-pill {
+    @apply px-3 py-1.5 text-sm font-medium transition-colors;
+    border-radius: var(--radius-md);
+  }
+  .phemossa-pill-active {
+    background: rgb(var(--color-accent));
+    color: rgb(var(--color-bg));
+  }
+  .phemossa-pill-inactive {
+    background: rgb(var(--color-bg-elevated));
+    color: rgb(var(--color-text-muted));
+    border: 1px solid rgb(var(--color-border));
+  }
+  .phemossa-pill-inactive:hover {
+    background: rgb(var(--color-bg-muted));
+    color: rgb(var(--color-text));
+  }
+
+  .phemossa-input {
+    @apply w-full px-3 py-2 text-sm transition-colors;
+    border-radius: var(--radius-md);
+    background: rgb(var(--color-bg-muted));
+    border: 1px solid rgb(var(--color-border));
+    color: rgb(var(--color-text));
+  }
+  .phemossa-input::placeholder {
+    color: rgb(var(--color-text-subtle));
+  }
+  .phemossa-input:hover:not(:disabled) {
+    border-color: rgb(var(--color-border-strong));
+  }
+  .phemossa-input:focus {
+    outline: none;
+    border-color: rgb(var(--color-accent));
+    box-shadow: 0 0 0 2px rgb(var(--color-accent) / 0.25);
+  }
+
+  .phemossa-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium;
+    border-radius: var(--radius-sm);
+  }
+  .phemossa-badge-topic {
+    background: rgb(var(--color-accent) / 0.15);
+    color: rgb(var(--color-accent));
+  }
+  .phemossa-badge-encrypted {
+    background: rgb(var(--color-encrypted) / 0.15);
+    color: rgb(var(--color-encrypted));
+  }
+  .phemossa-badge-public {
+    background: rgb(var(--color-bg-muted));
+    color: rgb(var(--color-text-muted));
+  }
+}

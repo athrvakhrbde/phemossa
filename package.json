@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "node scripts/patch-static-name.js"
+    "postinstall": "node scripts/patch-static-name.js",
+    "deploy:cloudflare": "npm run build && npx wrangler deploy"
   },
   "dependencies": {
     "@chainsafe/libp2p-noise": "^12.0.1",

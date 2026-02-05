@@ -49,10 +49,21 @@ Serve the output of `next build`. The app uses **client-side rendering** for the
 2. **Publish directory:** `.next` (Netlify’s Next runtime will use it; or use **Next on Netlify** plugin / `@netlify/plugin-nextjs`).
 3. **Environment:** No env vars required unless you add them (e.g. `NEXT_PUBLIC_*` for bootstrap peers).
 
-### Cloudflare Pages
+### Cloudflare Pages (static export — recommended)
 
-- Use **@cloudflare/next-on-pages** or the Next.js adapter for Pages so the app runs on Workers/Pages. Follow [Cloudflare’s Next.js guide](https://developers.cloudflare.com/pages/framework-guides/nextjs/).
-- Build command: `npm run build` (or the adapter’s build script).
+This app uses **static export** (`output: 'export'`), so Next.js writes to `out/`. Use Cloudflare’s built-in upload; **do not** set a custom Deploy command.
+
+1. **Build command:** `npm run build`
+2. **Build output directory / Publish directory:** `out`
+3. **Deploy command:** leave **empty** (so Cloudflare uploads `out/` automatically)
+
+If you have a custom “Deploy command” (e.g. `npx wrangler deploy`), **remove it**. The deploy step then runs in a context where `out/` is not available, so wrangler fails with “directory does not exist”. Using only the build command + output directory avoids that.
+
+**Fix for "directory does not exist":** Use a single Build command so `out/` exists when wrangler runs. Set **Build command** to `npm run deploy:cloudflare` and set **Deploy command** to **empty**. The `deploy:cloudflare` script (in package.json) runs `next build` then `wrangler deploy` in one step.
+
+### Cloudflare Pages (Next.js with adapter)
+
+- For full Next.js (SSR, etc.) use **@cloudflare/next-on-pages** or the Next.js adapter. Follow [Cloudflare’s Next.js guide](https://developers.cloudflare.com/pages/framework-guides/nextjs/).
 
 ### Docker (Node server)
 
